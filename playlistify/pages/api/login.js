@@ -1,4 +1,7 @@
 import querystring from 'querystring'
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI; 
 
 require('dotenv').config(); 
 
@@ -19,9 +22,6 @@ export default async function login(req, res) {
   const state = generateRandomString(16);
   // res.cookie(stateKey, state);
 
-  const CLIENT_ID = process.env.CLIENT_ID;
-  const CLIENT_SECRET = process.env.CLIENT_SECRET;
-  const REDIRECT_URI = process.env.REDIRECT_URI; 
 
   const scope = 'user-read-private user-read-email';
   
