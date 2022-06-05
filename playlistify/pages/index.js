@@ -20,7 +20,7 @@ export default function Home() {
         </h1>
 
         <p className={styles.description}>
-          Get started by logging in     
+          Get started by logging in {' '}
           <Link href="/api/login" passHref>here
           </Link>
         </p>
