@@ -4,6 +4,9 @@ require('dotenv').config();
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
+import { useEffect, useState } from 'react';
+
+
 
 export default async function callback(req, res) {
 
@@ -22,24 +25,22 @@ export default async function callback(req, res) {
         Authorization: `Basic ${new Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`,
       },
     })
-    .then(response => {
+      .then(response => {
         if (response.status === 200) {
-    
-            const { refresh_token } = response.data;
+          const { access_token, refresh_token } = response.data;
+          const queryParams = querystring.stringify({
+            access_token,
+            refresh_token,
+          });
+  
+          res.redirect(`http://localhost:3000/dashboard?${queryParams}`);
 
-            axios.get(`http://localhost:3000/api/refresh_token?refresh_token=${refresh_token}`)
-              .then(response => {
-                res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`);
-              })
-              .catch(error => {
-                res.send(error);
-              });
-    
         } else {
-          res.send(response);
+          res.redirect(`/?${querystring.stringify({ error: 'invalid_token' })}`);
         }
       })
       .catch(error => {
         res.send(error);
       });
-  };
+};
+
