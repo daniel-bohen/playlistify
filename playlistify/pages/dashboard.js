@@ -1,20 +1,37 @@
 import Head from "next/head"
 import styles from '../styles/Home.module.css'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import SpotifyWebApi from "spotify-web-api-js";
 
-
+let s = new SpotifyWebApi()
 
 
 export default function dashboard() {
+  const [p, setP] = useState([])
   useEffect(() => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const accessToken = urlParams.get('access_token');
     const refreshToken = urlParams.get('refresh_token');
-
-    console.log(accessToken);
-    console.log(refreshToken);
+    s.setAccessToken(accessToken);
   });
+
+  const fetchData = () => {
+    s.getMe() // note that we don't pass a user id
+    .then(
+      function (data) {
+        setP(data.display_name)
+      },
+      function (err) {
+        console.error(err);
+      }
+    );
+  } 
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
     return (
       <div className={styles.container}>
         <Head>
@@ -25,7 +42,7 @@ export default function dashboard() {
   
         <main className={styles.main}>
           <h1 className={styles.title}>
-            Welcome to your dashboard!
+            Welcome to your dashboard, {p}!
           </h1> 
         </main>
   
