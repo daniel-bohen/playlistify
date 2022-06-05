@@ -2,7 +2,6 @@ import Head from 'next/head'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import React from 'react'
-
 require('dotenv').config(); 
 
 export default function Home() {
@@ -28,7 +27,7 @@ export default function Home() {
 
       <footer className={styles.footer}>
         <a
-          // href="https://www.linkedin.com/in/danielbohen/"
+          href="https://www.linkedin.com/in/danielbohen/"
           target="_blank"
           rel="noopener noreferrer"
         >
