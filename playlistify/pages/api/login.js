@@ -23,7 +23,7 @@ export default async function login(req, res) {
   // res.cookie(stateKey, state);
 
 
-  const scope = 'user-read-private user-top-read user-library-modify user-library-read playlist-read-collaborative playlist-modify-public playlist-read-private playlist-modify-private';
+  const scope = 'user-read-private user-top-read user-library-modify user-library-read playlist-read-collaborative playlist-modify-public playlist-read-private playlist-modify-private user-read-recently-played';
   
   const queryParams = querystring.stringify({
     client_id: CLIENT_ID,
