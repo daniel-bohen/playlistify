@@ -20,10 +20,9 @@ export default function Home() {
 
         <p className={styles.description}>
           Get started by logging in {' '}
-          <Link href="/api/login" passHref>here
-          </Link>
+          <Link href="/api/login" passHref><b>here</b></Link>
         </p>
-      </main>
+      </main> 
 
       <footer className={styles.footer}>
         <a

@@ -2,6 +2,7 @@ import Head from "next/head"
 import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react'
 import SpotifyWebApi from "spotify-web-api-js";
+import Link from 'next/link'
 
 var s = new SpotifyWebApi()
 
@@ -41,7 +42,7 @@ export default function dashboard() {
 
 
   const fetchTopTracks = () => {
-    s.getMyTopTracks({limit: 50})
+    s.getMyTopTracks({ limit: 50 })
       .then(
         function (data) {
           console.log(data)
@@ -55,7 +56,7 @@ export default function dashboard() {
 
 
   const fetchTopArtists = () => {
-    s.getMyTopArtists({limit: 50})
+    s.getMyTopArtists({ limit: 50 })
       .then(
         function (data) {
           console.log(data)
@@ -68,7 +69,7 @@ export default function dashboard() {
   }
 
   const fetchRecent = () => {
-    s.getMyRecentlyPlayedTracks({limit: 50})
+    s.getMyRecentlyPlayedTracks({ limit: 50 })
       .then(
         function (data) {
           console.log(data)
@@ -81,7 +82,7 @@ export default function dashboard() {
   }
 
   const fetchPlaylists = () => {
-    s.getUserPlaylists(userID, {limit: 50})
+    s.getUserPlaylists(userID, { limit: 50 })
       .then(
         function (data) {
           console.log(data)
@@ -92,10 +93,6 @@ export default function dashboard() {
         }
       );
   }
-
-
-
-
 
   return (
     <div className={styles.container}>
@@ -109,19 +106,29 @@ export default function dashboard() {
         <h1 className={styles.title}>
           Welcome to your dashboard, {name}!
         </h1>
+
+
         <div className={styles.grid}>
           <button class={styles.code} onClick={fetchTopTracks}> Get My Top Tracks</button>
           <button class={styles.code} onClick={fetchTopArtists}> Get My Top Artists</button>
           <button class={styles.code} onClick={fetchRecent}> Get My Recent Tracks</button>
           <button class={styles.code} onClick={fetchPlaylists}> Get My Playlists</button>
         </div>
-                <div className={styles.gridOutput}></div>
-                  <ol className={styles.code}>{topTracks.map(track => (<li>{track.name}{' - '}{track.artists[0].name}</li>))}</ol>
-                  <ol className={styles.code}>{topArtists.map(artist => (<li>{artist.name}</li>))}</ol>
-                  <ol className={styles.code}>{recentTracks.map(song => (<li>{song.track.name}{' - '}{song.track.artists[0].name}</li>))}</ol>
-                  <ol className={styles.code}>{playlists.map(playlist => (<li>{playlist.name}</li>))}</ol>
-                <div className={styles.grid}></div>
+
+
+        {/* TODO: Fix display format to be component based */}
+        <div className={styles.gridOutput}>
+          <ol className={styles.code}>{topTracks.map(track => (<li>{track.name}{' - '}{track.artists[0].name}</li>))}</ol>
+          <ol className={styles.code}>{topArtists.map(artist => (<li>{artist.name}</li>))}</ol>
+          <ol className={styles.code}>{recentTracks.map(song => (<li>{song.track.name}{' - '}{song.track.artists[0].name}</li>))}</ol>
+          <ol className={styles.code}>{playlists.map(playlist => (<li>{playlist.name}</li>))}</ol>
+        </div>
+
+        {/* TODO: Fix logout button */}
+        <button class={styles.code}><Link href='https://accounts.spotify.com/en/logout' passHref>Logout</Link>Link</button>
       </main>
+
+
 
       <footer className={styles.footer}>
         <a

@@ -20,8 +20,6 @@ const stateKey = 'spotify_auth_state';
 export default async function login(req, res) {
   // Fetch data from external API
   const state = generateRandomString(16);
-  // res.cookie(stateKey, state);
-
 
   const scope = 'user-read-private user-top-read user-library-modify user-library-read playlist-read-collaborative playlist-modify-public playlist-read-private playlist-modify-private user-read-recently-played';
   
@@ -29,6 +27,7 @@ export default async function login(req, res) {
     client_id: CLIENT_ID,
     response_type: 'code',
     redirect_uri: REDIRECT_URI,
+    show_dialog: true,
     state: state,
     scope: scope,
   });
