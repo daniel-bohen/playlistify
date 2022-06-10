@@ -117,15 +117,15 @@ export default function dashboard() {
 
 
         {/* TODO: Fix display format to be component based */}
-        <div className={styles.gridOutput}>
-          <ol className={styles.code}>{topTracks.map(track => (<li>{track.name}{' - '}{track.artists[0].name}</li>))}</ol>
-          <ol className={styles.code}>{topArtists.map(artist => (<li>{artist.name}</li>))}</ol>
-          <ol className={styles.code}>{recentTracks.map(song => (<li>{song.track.name}{' - '}{song.track.artists[0].name}</li>))}</ol>
-          <ol className={styles.code}>{playlists.map(playlist => (<li>{playlist.name}</li>))}</ol>
+        <div className={styles.grid}>
+          <ol>{topTracks.map(track => (<li>{track.name}{' - '}{track.artists[0].name}</li>))}</ol>
+          <ol>{topArtists.map(artist => (<li>{artist.name}</li>))}</ol>
+          <ol>{recentTracks.map(song => (<li>{song.track.name}{' - '}{song.track.artists[0].name}</li>))}</ol>
+          <ol>{playlists.map(playlist => (<li>{playlist.name}</li>))}</ol>
         </div>
 
         {/* TODO: Fix logout button */}
-        <button class={styles.code}><Link href='https://accounts.spotify.com/en/logout' passHref>Logout</Link>Link</button>
+        <button class={styles.code}><Link href='https://accounts.spotify.com/en/logout' passHref>Logout</Link></button>
       </main>
 
 
@@ -136,7 +136,7 @@ export default function dashboard() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Created by Daniel Bohen
+          Created by Daniel Bohen. 
         </a>
       </footer>
     </div>

@@ -30,7 +30,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Created by Daniel Bohen
+          Created by Daniel Bohen.
         </a>
       </footer>
     </div>

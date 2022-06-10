@@ -1,9 +1,12 @@
 .container {
+  background: #000000;
   padding: 0 2rem;
 }
 
 
 .main {
+  background: #000000;
+  color: rgb(0, 255, 0); 
   min-height: 100vh;
   padding: 4rem 0;
   flex: 1;
@@ -14,6 +17,8 @@
 }
 
 .footer {
+  background: #000000;
+  color: rgb(0, 255, 0); 
   display: flex;
   flex: 1;
   padding: 2rem 0;
@@ -23,6 +28,7 @@
 }
 
 .footer a {
+  color: rgb(0, 255, 0); 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,6 +47,7 @@
 }
 
 .title {
+  color: rgb(0, 255, 0); 
   margin: 0;
   line-height: 1.15;
   font-size: 4rem;
@@ -52,13 +59,26 @@
 }
 
 .description {
+  color: rgb(0, 255,0); 
   margin: 4rem 0;
   line-height: 1.5;
   font-size: 1.5rem;
 }
 
 .code {
-  background: #fafafa;
+  color: rgb(0, 255, 0); 
+  background: #1b1b1b;
+  border-radius: 5px;
+  padding: .25rem;
+  font-size: 1.1rem;
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+    Bitstream Vera Sans Mono, Courier New, monospace;
+}
+
+.ol{
+  list-style: none;
+  color: rgb(0, 255, 0); 
+  background: #1b1b1b;
   border-radius: 5px;
   padding: .25rem;
   font-size: 1.1rem;
@@ -75,16 +95,10 @@
   max-width: 1000px;
 }
 
-.gridOutput {
-  padding: 0rem; 
-  display: flex;
-  align-items: stretch;
-  justify-content: stretch;
-  flex-wrap: wrap;
-  max-width: 2600;
-}
+
 
 .card {
+  color: rgb(0, 255, 0); 
   margin: 1rem;
   padding: 1.5rem;
   text-align: left;
