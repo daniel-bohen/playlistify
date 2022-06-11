@@ -6,13 +6,68 @@ import Link from 'next/link'
 
 var s = new SpotifyWebApi()
 
+
 export default function dashboard() {
   const [name, setName] = useState([])
   const [userID, setUserID] = useState([])
-  const [topTracks, setTopTracks] = useState([])
+  const [dataset, setData] = useState([])
   const [topArtists, setTopArtists] = useState([])
+  const [topTracks, setTopTracks] = useState([])
   const [recentTracks, setRecent] = useState([])
   const [playlists, setPlaylists] = useState([])
+
+  const fetchTopTracks = () => {
+    s.getMyTopTracks({ limit: 50 })
+      .then(
+        function (data) {
+          console.log(data)
+          setData(data.items)
+        },
+        function (err) {
+          console.error(err);
+        }
+      );
+  }
+
+
+  const fetchTopArtists = () => {
+    s.getMyTopArtists({ limit: 50 })
+      .then(
+        function (data) {
+          console.log(data)
+          setData(data.items)
+        },
+        function (err) {
+          console.error(err);
+        }
+      );
+  }
+
+  const fetchRecent = () => {
+    s.getMyRecentlyPlayedTracks({ limit: 50 })
+      .then(
+        function (data) {
+          console.log(data)
+          setData(data.items)
+        },
+        function (err) {
+          console.error(err);
+        }
+      );
+  }
+
+  const fetchPlaylists = () => {
+    s.getUserPlaylists(userID, { limit: 50 })
+      .then(
+        function (data) {
+          console.log(data)
+          setData(data.items)
+        },
+        function (err) {
+          console.error(err);
+        }
+      );
+  }
 
 
   useEffect(() => {
@@ -41,58 +96,7 @@ export default function dashboard() {
   }, [])
 
 
-  const fetchTopTracks = () => {
-    s.getMyTopTracks({ limit: 50 })
-      .then(
-        function (data) {
-          console.log(data)
-          setTopTracks(data.items)
-        },
-        function (err) {
-          console.error(err);
-        }
-      );
-  }
 
-
-  const fetchTopArtists = () => {
-    s.getMyTopArtists({ limit: 50 })
-      .then(
-        function (data) {
-          console.log(data)
-          setTopArtists(data.items)
-        },
-        function (err) {
-          console.error(err);
-        }
-      );
-  }
-
-  const fetchRecent = () => {
-    s.getMyRecentlyPlayedTracks({ limit: 50 })
-      .then(
-        function (data) {
-          console.log(data)
-          setRecent(data.items)
-        },
-        function (err) {
-          console.error(err);
-        }
-      );
-  }
-
-  const fetchPlaylists = () => {
-    s.getUserPlaylists(userID, { limit: 50 })
-      .then(
-        function (data) {
-          console.log(data)
-          setPlaylists(data.items)
-        },
-        function (err) {
-          console.error(err);
-        }
-      );
-  }
 
   return (
     <div className={styles.container}>
@@ -111,17 +115,15 @@ export default function dashboard() {
         <div className={styles.grid}>
           <button class={styles.code} onClick={fetchTopTracks}> Get My Top Tracks</button>
           <button class={styles.code} onClick={fetchTopArtists}> Get My Top Artists</button>
-          <button class={styles.code} onClick={fetchRecent}> Get My Recent Tracks</button>
+          {/* <button class={styles.code} onClick={fetchRecent}> Get My Recent Tracks</button> */}
           <button class={styles.code} onClick={fetchPlaylists}> Get My Playlists</button>
         </div>
 
-
-        {/* TODO: Fix display format to be component based */}
-        <div className={styles.grid}>
-          <ol>{topTracks.map(track => (<li>{track.name}{' - '}{track.artists[0].name}</li>))}</ol>
-          <ol>{topArtists.map(artist => (<li>{artist.name}</li>))}</ol>
-          <ol>{recentTracks.map(song => (<li>{song.track.name}{' - '}{song.track.artists[0].name}</li>))}</ol>
-          <ol>{playlists.map(playlist => (<li>{playlist.name}</li>))}</ol>
+        <div>
+          <ol>{dataset?.map(artist => (<li>{artist.name}</li>))}</ol>
+          {/* <ol>{dataset?.map(track => (<li>{track.name}{' - '}{track.artists[0].name}</li>))}</ol>
+          <ol>{dataset?.map(playlist => (<li>{playlist.name}</li>))}</ol>
+          <ol>{dataset?.map(song => (<li>{song.track.name}{' - '}{song.track.artists[0].name}</li>))}</ol> */}
         </div>
 
         {/* TODO: Fix logout button */}
@@ -136,7 +138,7 @@ export default function dashboard() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Created by Daniel Bohen. 
+          Created by Daniel Bohen.
         </a>
       </footer>
     </div>
