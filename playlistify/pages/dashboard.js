@@ -1,10 +1,26 @@
 import Head from "next/head"
 import styles from '../styles/Home.module.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useReducer } from 'react'
 import SpotifyWebApi from "spotify-web-api-js";
 import Link from 'next/link'
 
 var s = new SpotifyWebApi()
+
+
+function display(state, action, data)
+{
+    switch(action.type)
+    {
+        case "yell":
+            return {
+                message: "HEY"
+            }
+        case "whisper": 
+        return {
+            message: "excuse me"
+        }
+    }
+}
 
 
 export default function dashboard() {
@@ -97,7 +113,6 @@ export default function dashboard() {
 
 
 
-
   return (
     <div className={styles.container}>
       <Head>
@@ -111,13 +126,14 @@ export default function dashboard() {
           Welcome to your dashboard, {name}!
         </h1>
 
-
         <div className={styles.grid}>
-          <button class={styles.code} onClick={fetchTopTracks}> Get My Top Tracks</button>
-          <button class={styles.code} onClick={fetchTopArtists}> Get My Top Artists</button>
+          <button className={styles.code} onClick={fetchTopTracks}> Get My Top Tracks</button>
+          <button className={styles.code} onClick={fetchTopArtists}> Get My Top Artists</button>
           {/* <button class={styles.code} onClick={fetchRecent}> Get My Recent Tracks</button> */}
-          <button class={styles.code} onClick={fetchPlaylists}> Get My Playlists</button>
+          <button className={styles.code} onClick={fetchPlaylists}> Get My Playlists</button>
         </div>
+
+        <Link className={styles.code} href="/editor" passHref>Go to Editor</Link>
 
         <div>
           <ol>{dataset?.map(artist => (<li>{artist.name}</li>))}</ol>
@@ -127,7 +143,7 @@ export default function dashboard() {
         </div>
 
         {/* TODO: Fix logout button */}
-        <button class={styles.code}><Link href='https://accounts.spotify.com/en/logout' passHref>Logout</Link></button>
+        <button className={styles.code}><Link href='https://accounts.spotify.com/en/logout' passHref>Logout</Link></button>
       </main>
 
 
